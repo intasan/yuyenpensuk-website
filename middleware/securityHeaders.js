@@ -19,7 +19,7 @@ function securityHeaders(req, res, next) {
     "img-src 'self' data: blob: https:",
     "connect-src 'self' https://api.iconify.design",
     "frame-src 'self' https://www.google.com https://maps.google.com",
-    "upgrade-insecure-requests"
+    ...(process.env.NODE_ENV === "production" ? ["upgrade-insecure-requests"] : [])
   ].join('; '));
   if (process.env.NODE_ENV === "production") {
     res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");

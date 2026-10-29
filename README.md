@@ -37,7 +37,7 @@ Docker Compose ใช้ `deploy-server.js` เป็น entry point เดี�
 
 ## Product images
 
-มีรูปสินค้า Local ที่ตรวจแล้ว 111 JPG สำหรับ 30 รุ่น และ runtime ไม่ดาวน์โหลดรูปจากเว็บไซต์ภายนอก
+runtime ใช้รูปสินค้าจากพื้นที่ uploads ภายนอก repository และไม่ดาวน์โหลดรูปจากเว็บไซต์ภายนอก ชุด JPG ไม่ได้รวมใน GitHub checkout นี้ จึงต้องเตรียมไฟล์จริงใน persistent uploads ก่อนตรวจแกลเลอรี จำนวนรูปในระบบที่ใช้งานจริงต้องตรวจจาก volume นั้นโดยตรง
 
 ## First production setup
 
@@ -68,3 +68,15 @@ docker compose up -d --build
 ```
 
 อย่าลบ `/opt/yuyenpensuk/data` หรือ `/opt/yuyenpensuk/uploads`
+
+## Local portfolio preview and checks
+
+```bash
+npm install
+npm run dev -- --port 3000
+npm test
+```
+
+The local preview serves only the public website, not the admin application. It displays a visible notice that seed CMS records are test content, not proof of actual installation jobs, customers or the state of the production server. Do not present seed project descriptions or stock imagery as delivered client work. Production continues to use `npm start`.
+
+On 30 October 2026 browser inspection found development HTTP assets being upgraded to HTTPS by CSP, preventing styles from loading. `upgrade-insecure-requests` is now production-only; HSTS and production CSP are preserved. Two automated header checks passed. The browser connection failed before a post-fix visual capture could be completed, so no screenshot or successful full browser QA is claimed for this fix. Original public checkout lacks product-upload files; client-specific files and production data were not accessed.

@@ -1,0 +1,10 @@
+✔ CSP and transport policy in development (0.816198ms)
+✔ CSP and transport policy in production (0.134319ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 73.565047
