@@ -1,0 +1,18 @@
+flowchart TD
+  N0["Visitor"]
+  N1["1.0 Public content"]
+  N2["D1 CMS / D2 Uploads"]
+  N3["Admin"]
+  N4["2.0 CMS"]
+  N5["D1 CMS"]
+  N6["D2 Uploads"]
+  N0 -->|"D01 ค้นหา brand/id/หน้าเนื้อหา"| N1
+  N1 -->|"HTML หรือ 404"| N0
+  N1 -->|"D02 อ่านข้อมูลและไฟล์ที่อ้างอิง"| N2
+  N2 -->|"เนื้อหาและ bytes ที่มีอยู่จริง"| N1
+  N3 -->|"D03 credentials/OTP หรือ content + CSRF + uploads"| N4
+  N4 -->|"session ผลบันทึก redirect หรือ error"| N3
+  N4 -->|"D04 อ่านสิทธิ์และบันทึกเนื้อหา"| N5
+  N5 -->|"ข้อมูลปัจจุบันหรือ save error"| N4
+  N4 -->|"D05 ตรวจและเขียนไฟล์; cleanup หลัง persist"| N6
+  N6 -->|"validated paths หรือ file error"| N4

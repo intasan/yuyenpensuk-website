@@ -1,0 +1,4 @@
+flowchart TD
+  CMS["db.json document"] --> CONTENT["Content collections"]
+  CMS --> ADMIN["Admin records"]
+  CONTENT -->|"path references"| FILES["External upload files"]

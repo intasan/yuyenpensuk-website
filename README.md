@@ -80,3 +80,9 @@ npm test
 The local preview serves only the public website, not the admin application. It displays a visible notice that seed CMS records are test content, not proof of actual installation jobs, customers or the state of the production server. Do not present seed project descriptions or stock imagery as delivered client work. Production continues to use `npm start`.
 
 On 30 October 2026 browser inspection found development HTTP assets being upgraded to HTTPS by CSP, preventing styles from loading. `upgrade-insecure-requests` is now production-only; HSTS and production CSP are preserved. Two automated header checks passed. The browser connection failed before a post-fix visual capture could be completed, so no screenshot or successful full browser QA is claimed for this fix. Original public checkout lacks product-upload files; client-specific files and production data were not accessed.
+
+## เอกสารวิเคราะห์ระบบ
+
+[Requirement และเอกสารออกแบบระบบ](docs/analysis/README.md) · [HTML ฉบับอ่าน](docs/analysis/analysis.html) · [SVG และ Mermaid ที่แก้ไขได้](docs/analysis/diagrams/)
+
+ชุดเอกสารจัดทำใหม่จาก source baseline วันที่ 30 ตุลาคม 2026 มี Functional Requirements, Business Rules, Context Diagram, DFD, Workflow, Data Model, Data Dictionary และ UAT traceability แยกสถานะที่พบในโค้ดออกจากสิ่งที่ผ่านการทดสอบและสิ่งที่ยังต้องยืนยันกับผู้ใช้ ไม่ใช่บันทึกสัมภาษณ์หรือเอกสารรับรองย้อนหลัง

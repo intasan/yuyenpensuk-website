@@ -1,0 +1,375 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Yuyenpensuk Website and CMS Analysis Documentation</title><meta name="description" content="Requirement Data Flow Data Model Workflow and UAT for Yuyenpensuk Website and CMS"><style>:root{font-family:Arial,Tahoma,sans-serif;color:#202a32;background:#f4f5f5;line-height:1.8}*{box-sizing:border-box}body{margin:0}header{padding:20px max(24px,calc((100vw - 1120px)/2));background:#172d3d;color:white;display:flex;gap:30px;justify-content:space-between;flex-wrap:wrap}header a{color:white}main{max-width:1180px;margin:30px auto;padding:40px;background:white}h1{font-size:30px;line-height:1.5;margin-top:0}h2{font-size:22px;margin:45px 0 18px;padding-top:12px;color:#172d3d}p{margin:15px 0}a{color:#225b7d;text-underline-offset:3px}li{margin:9px 0}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.7}th,td{border:1px solid #d5dce0;padding:12px 14px;text-align:left;vertical-align:top}th{background:#edf1f3;color:#172d3d}tr:nth-child(even) td{background:#fbfcfd}.table-wrap{overflow:auto;margin:20px 0}img{display:block;width:100%;height:auto;border:1px solid #dde3e7;margin:25px 0}code{background:#eef1f3;padding:2px 4px;overflow-wrap:anywhere}nav{padding:20px 0;display:flex;gap:15px;flex-wrap:wrap;font-size:12px;border-bottom:1px solid #dde3e7}footer{max-width:1120px;margin:auto;padding:20px 0 40px;color:#637480;font-size:12px}.meta{color:#637480;font-size:12px}button{font:inherit;padding:8px 12px;background:white;border:1px solid #aebdc7;cursor:pointer}@media(max-width:700px){main{margin:0;padding:25px 18px}h1{font-size:24px}h2{font-size:20px}table{min-width:680px}header{padding:18px}footer{padding:20px}}@media print{@page{size:A4 landscape;margin:15mm}header,nav,.controls{display:none}body{background:white;font-size:10pt}main{margin:0;padding:0;max-width:none}h1{font-size:22pt}h2{font-size:15pt;break-after:avoid;margin-top:25px}img{max-height:160mm;object-fit:contain;break-inside:avoid}table{font-size:8pt;min-width:0}tr{break-inside:avoid}thead{display:table-header-group}.table-wrap{overflow:visible}a{color:inherit}footer{display:none}}</style></head><body><header><b>Panupong Intasan · System Analysis</b><a href="https://intasan.github.io/portfolio/">กลับ Portfolio ↗</a><a href="https://github.com/intasan/yuyenpensuk-website/tree/main/docs/analysis">เอกสารและไฟล์ต้นฉบับ GitHub ↗</a></header><main><p class="meta">ANALYSIS DOCUMENT 1.0 · 30 OCTOBER 2026 · SOURCE f3d52d94</p><nav aria-label="สารบัญเอกสาร"><a href="#section-1">1 เป้าหมาย ผู้ใช้งาน และขอบเขต</a><a href="#section-2">2 วิธีเก็บและยืนยันความต้องการ</a><a href="#section-3">3 Functional Requirements และเกณฑ์ยอมรับ</a><a href="#section-4">4 Business Rules</a><a href="#section-5">5 Non Functional Requirements</a><a href="#section-6">6 Context Diagram</a><a href="#section-7">7 Data Flow Diagram และทะเบียนข้อมูล</a><a href="#section-8">8 Workflow</a><a href="#section-9">9 Data Model และ Data Dictionary</a><a href="#section-10">10 UAT และ Requirement Traceability</a><a href="#section-11">11 ข้อจำกัดและความเสี่ยง</a><a href="#section-12">12 คำถามที่ต้องยืนยันก่อนขยายระบบ</a><a href="#section-13">13 Source Baseline และประวัติเอกสาร</a></nav><h1>Yuyenpensuk Website and CMS เอกสารวิเคราะห์ความต้องการและออกแบบระบบ</h1>
+<p>รุ่นเอกสาร 1.0 · วันที่ 30 October 2026 · ผู้จัดทำ Panupong Intasan โดยใช้ AI assistance ใน ChatGPT Work</p>
+<p>ให้ผู้สนใจเปิดดูข้อมูลบริษัท สินค้าและบริการ และให้ทีมงานปรับเนื้อหาผ่าน CMS โดยไม่ต้องแก้หน้าเว็บด้วยตนเอง โครงสร้างปัจจุบันเป็นเว็บบริษัทและระบบจัดการเนื้อหา ไม่ใช่ระบบ checkout หรือบริหารงานติดตั้งครบวงจร</p>
+<p><strong>สถานะเอกสาร:</strong> จัดทำใหม่จากการอ่านโค้ด ณ commit <code>f3d52d949649cb190f92496092bc6b0dc6739541</code> เพื่ออธิบายระบบและใช้ตรวจรับ ไม่ใช่บันทึกการสัมภาษณ์หรือหลักฐานว่าผู้มีส่วนได้ส่วนเสียอนุมัติ Requirement แล้ว รายการที่ยังต้องตัดสินใจอยู่ในหัวข้อคำถามยืนยัน</p>
+<p><a href="https://intasan.github.io/portfolio/analysis/yuyenpensuk/index.html">อ่านฉบับเว็บบน Portfolio</a> · <a href="analysis.html">ไฟล์ HTML</a> · <a href="diagrams/">Diagram source</a></p>
+<h2 id="section-1">1 เป้าหมาย ผู้ใช้งาน และขอบเขต</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ผู้เกี่ยวข้อง</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ผู้เข้าชม</td>
+<td>ค้นหาสินค้า อ่านบริการ ผลงาน ราคาและช่องทางติดต่อ</td>
+</tr>
+<tr>
+<td>Editor</td>
+<td>เข้าสู่ระบบและจัดการเนื้อหาตาม route ที่อนุญาต</td>
+</tr>
+<tr>
+<td>Super Admin</td>
+<td>จัดการเนื้อหาและบัญชีผู้ดูแล</td>
+</tr>
+<tr>
+<td>ผู้ดูแลเซิร์ฟเวอร์</td>
+<td>ติดตั้ง สำรอง db.json และ uploads ดูแล hostname และ HTTPS</td>
+</tr>
+</tbody></table></div>
+<p><strong>อยู่ในขอบเขต:</strong> Public website, CMS สำหรับบริษัท สินค้า บริการ ข่าว ผลงาน banner ราคา payment instructions และบัญชีผู้ดูแล</p>
+<p><strong>อยู่นอกขอบเขต:</strong> ตะกร้าสินค้า รับชำระอัตโนมัติ Stock ledger ใบเสนอราคา CRM นัดช่าง และหลักฐานรับรองว่างานติดตั้งตัวอย่างเกิดขึ้นจริง</p>
+<h2 id="section-2">2 วิธีเก็บและยืนยันความต้องการ</h2>
+<p>เอกสารรอบนี้ใช้ source review, schema review และผลทดสอบที่มีอยู่เป็น input ข้อกำหนดแบบ As implemented ใช้อธิบายพฤติกรรมที่พบในโค้ด ส่วน To be เป็นข้อเสนอหรือคำถามที่ยังไม่ได้อนุมัติ ไม่มีการสร้างชื่อผู้ให้สัมภาษณ์ วันประชุม หรือผลลงนามย้อนหลัง</p>
+<p>กระบวนการยืนยันที่เสนอคือให้ผู้ใช้งานหลักทบทวน scope และ Business Rules จากนั้นเดินผ่าน scenario ปกติและข้อผิดพลาด บันทึกคำตอบพร้อมผู้ตัดสินใจ แล้วปรับ version ของ Requirement และ UAT ก่อนรับรองการใช้งานจริง</p>
+<h2 id="section-3">3 Functional Requirements และเกณฑ์ยอมรับ</h2>
+<p>ทุกแถวต่อไปนี้เป็น <strong>As implemented จากโค้ด</strong> คอลัมน์หลักฐานแยกสิ่งที่มีการทดสอบเดิมกับสิ่งที่เพียงพบใน source การจัดทำเอกสารไม่ได้ทำให้ผลทดสอบที่ยังรออยู่กลายเป็นผ่าน</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>รหัส</th>
+<th>ความต้องการ</th>
+<th>เกณฑ์ยอมรับ</th>
+<th>Source</th>
+<th>หลักฐานหรือสถานะ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Y-FR01</td>
+<td>แสดงเว็บสาธารณะจากข้อมูล CMS</td>
+<td>อ่านข้อมูลปัจจุบันก่อน render และแสดงหน้า public โดยไม่ต้อง login</td>
+<td>server.js</td>
+<td>พบในโค้ด</td>
+</tr>
+<tr>
+<td>Y-FR02</td>
+<td>ค้นสินค้าและกรองยี่ห้อ</td>
+<td>กรอง q หรือ brand และเปิดรายละเอียด id ที่มีอยู่</td>
+<td>routes/site.js</td>
+<td>พบในโค้ด</td>
+</tr>
+<tr>
+<td>Y-FR03</td>
+<td>อ่านแกลเลอรีจากไฟล์ local</td>
+<td>ส่งเฉพาะรูปที่หาได้จริงใน uploads และคืน 404 เมื่อไม่มี binary</td>
+<td>utils/product-images.js</td>
+<td>ต้องทดสอบกับ uploads จริง</td>
+</tr>
+<tr>
+<td>Y-FR04</td>
+<td>ยืนยันตัวตนผู้ดูแล</td>
+<td>ตรวจรหัสผ่านที่ hash และ OTP หากบัญชีเปิด 2FA</td>
+<td>routes/admin.js</td>
+<td>พบในโค้ด ยังไม่ทดสอบ end to end ในรอบนี้</td>
+</tr>
+<tr>
+<td>Y-FR05</td>
+<td>จำกัดหน้าจัดการบัญชี</td>
+<td>requireSuperAdmin ปฏิเสธ Editor ด้วย 403</td>
+<td>middleware/auth.js</td>
+<td>พบในโค้ด</td>
+</tr>
+<tr>
+<td>Y-FR06</td>
+<td>เพิ่มแก้ลบเนื้อหา CMS</td>
+<td>รับข้อมูลผ่าน authenticated CRUD และบันทึก db.json</td>
+<td>routes/admin.js</td>
+<td>ต้องทดสอบ CRUD ในข้อมูลแยก</td>
+</tr>
+<tr>
+<td>Y-FR07</td>
+<td>ตรวจไฟล์อัปโหลดและ CSRF</td>
+<td>ตรวจขนาด ชนิดและ magic bytes; ปฏิเสธ token ที่ไม่ตรง session</td>
+<td>routes/admin.js</td>
+<td>พบในโค้ด ต้องทดสอบไฟล์ผิดชนิด</td>
+</tr>
+<tr>
+<td>Y-FR08</td>
+<td>คงข้อมูลหลัง deploy ใหม่</td>
+<td>ใช้ DATA_DIR และ UPLOAD_DIR ภายนอก container; โหลด db เดิมโดยไม่ seed ทับ</td>
+<td>database.js</td>
+<td>ต้องทดสอบ restart บน volume แยก</td>
+</tr>
+<tr>
+<td>Y-FR09</td>
+<td>แยก public และ admin ด้วย hostname</td>
+<td>deploy-server.js เลือก app ตาม host ที่กำหนด</td>
+<td>deploy-server.js</td>
+<td>ต้องทดสอบ routing / proxy</td>
+</tr>
+<tr>
+<td>Y-FR10</td>
+<td>ป้องกันลบรูปก่อนบันทึกข้อมูลสำเร็จ</td>
+<td>persist ก่อน cleanup และ rollback object หาก save ล้มเหลว</td>
+<td>routes/admin.js</td>
+<td>พบในโค้ด ต้องทดสอบ fault injection</td>
+</tr>
+</tbody></table></div>
+<h2 id="section-4">4 Business Rules</h2>
+<ol>
+<li>seed ใช้เฉพาะเมื่อไม่มี db.json เดิม รายการ CMS ที่มีอยู่เป็นข้อมูลหลัก</li>
+<li>รูปและฐานข้อมูลอยู่คนละที่ ต้องสำรองเป็นชุดที่สอดคล้องกัน</li>
+<li>Editor ไม่ได้มีสิทธิ์จัดการบัญชีผู้ดูแล; Super Admin ต้องผ่าน requireAuth ด้วย</li>
+<li>ข้อมูล projects และข้อความการตลาดที่ seed มาไม่ใช่หลักฐานยืนยันลูกค้าหรือสถิติการส่งมอบ</li>
+<li>Production บังคับ SESSION_SECRET และรหัสเริ่มต้นที่ตรงเงื่อนไข พร้อม HTTPS; dev preview ไม่เปิด app admin</li>
+</ol>
+<h2 id="section-5">5 Non Functional Requirements</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>รหัส</th>
+<th>ประเด็น</th>
+<th>เกณฑ์และสถานะ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yuyenpensuk-NFR01</td>
+<td>Data integrity</td>
+<td>ใช้การตรวจสอบ input และการบันทึกที่สอดคล้องกับ business rules; ดูข้อจำกัดรายโครงการด้านล่าง</td>
+</tr>
+<tr>
+<td>yuyenpensuk-NFR02</td>
+<td>Access control</td>
+<td>ตรวจสิทธิ์ที่ server ตาม actor และ endpoint; ไม่อ้างสิทธิ์ที่ระบบยังไม่มี</td>
+</tr>
+<tr>
+<td>yuyenpensuk-NFR03</td>
+<td>Observability</td>
+<td>ต้องอธิบาย error / unavailable และ provenance ที่มีอยู่; audit trail แบบสมบูรณ์ยังไม่ถือว่ามี</td>
+</tr>
+<tr>
+<td>yuyenpensuk-NFR04</td>
+<td>Usability</td>
+<td>เสนอให้ทดสอบ desktop และ mobile ตั้งแต่ 360 px พร้อม keyboard; ยังไม่มีผลตรวจครบทุกขนาด</td>
+</tr>
+<tr>
+<td>yuyenpensuk-NFR05</td>
+<td>Performance</td>
+<td>ยังไม่มี SLA ที่ผู้เกี่ยวข้องอนุมัติ ต้องกำหนดจำนวนผู้ใช้และเกณฑ์ response time ก่อน load test</td>
+</tr>
+<tr>
+<td>yuyenpensuk-NFR06</td>
+<td>Recovery</td>
+<td>เสนอให้ทดสอบสำรองและกู้คืนข้อมูลพร้อมไฟล์ที่สัมพันธ์กัน; RPO/RTO ยังต้องตกลง ไม่กำหนดตัวเลขแทนผู้ใช้</td>
+</tr>
+</tbody></table></div>
+<h2 id="section-6">6 Context Diagram</h2>
+<p><img src="diagrams/context.svg" alt="Context Diagram"></p>
+<p>อ่านร่วมกับ <a href="diagrams/context.mmd">Mermaid context source</a> ซึ่งแสดงข้อมูลขาเข้าและขาออกแยกทิศทาง Context Diagram กำหนดขอบเขตระบบทั้งก้อน ไม่แสดง data store ภายใน</p>
+<h2 id="section-7">7 Data Flow Diagram และทะเบียนข้อมูล</h2>
+<p><img src="diagrams/data-flow.svg" alt="Data flow process overview"></p>
+<p>ภาพ SVG เป็น process overview แบบย่อ ส่วน <a href="diagrams/data-flow.mmd">DFD Mermaid source</a> และทะเบียนด้านล่างแสดงทิศทาง request/response และ data store อย่างละเอียด ห้ามตีความลูกศรเป็นลำดับเวลาดำเนินงานอย่างเดียว</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Flow</th>
+<th>ต้นทาง</th>
+<th>ปลายทาง</th>
+<th>ข้อมูลที่ส่งไป</th>
+<th>ข้อมูลตอบกลับ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D01</td>
+<td>Visitor</td>
+<td>1.0 Public content</td>
+<td>ค้นหา brand/id/หน้าเนื้อหา</td>
+<td>HTML หรือ 404</td>
+</tr>
+<tr>
+<td>D02</td>
+<td>1.0 Public content</td>
+<td>D1 CMS / D2 Uploads</td>
+<td>อ่านข้อมูลและไฟล์ที่อ้างอิง</td>
+<td>เนื้อหาและ bytes ที่มีอยู่จริง</td>
+</tr>
+<tr>
+<td>D03</td>
+<td>Admin</td>
+<td>2.0 CMS</td>
+<td>credentials/OTP หรือ content + CSRF + uploads</td>
+<td>session ผลบันทึก redirect หรือ error</td>
+</tr>
+<tr>
+<td>D04</td>
+<td>2.0 CMS</td>
+<td>D1 CMS</td>
+<td>อ่านสิทธิ์และบันทึกเนื้อหา</td>
+<td>ข้อมูลปัจจุบันหรือ save error</td>
+</tr>
+<tr>
+<td>D05</td>
+<td>2.0 CMS</td>
+<td>D2 Uploads</td>
+<td>ตรวจและเขียนไฟล์; cleanup หลัง persist</td>
+<td>validated paths หรือ file error</td>
+</tr>
+</tbody></table></div>
+<h2 id="section-8">8 Workflow</h2>
+<p><img src="diagrams/workflow.svg" alt="Workflow"></p>
+<ol>
+<li>ผู้ดูแลเข้าสู่ระบบและ OTP หากเปิดใช้</li>
+<li>เลือกประเภทเนื้อหาและกรอกข้อมูล</li>
+<li>ตรวจสิทธิ์ CSRF และไฟล์</li>
+<li>บันทึก db.json แล้วจัดการรูปที่ไม่อ้างอิง</li>
+<li>ผู้เข้าชมเปิดข้อมูลที่อัปเดต</li>
+</ol>
+<p>ข้อผิดพลาดต้องส่งผลตาม Requirement ที่เกี่ยวข้องและไม่ข้ามการตรวจสิทธิ์หรือความถูกต้องของข้อมูล <a href="diagrams/workflow.mmd">แก้ไข Mermaid workflow</a></p>
+<h2 id="section-9">9 Data Model และ Data Dictionary</h2>
+<p><img src="diagrams/data-model.svg" alt="Data model"></p>
+<p>นี่เป็นแบบจำลองเชิงตรรกะของข้อมูล JSON และไฟล์ ไม่มี SQL table หรือ FK บังคับความสัมพันธ์</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Entity หรือ data store</th>
+<th>ข้อมูลหลัก</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CMS_DOCUMENT</td>
+<td>db.json physical file; company object; products / services arrays; projects / news / banners arrays; admins / pricing / payment</td>
+</tr>
+<tr>
+<td>CONTENT_RECORD</td>
+<td>id within collection; title or name; image / gallery file paths; other fields by collection</td>
+</tr>
+<tr>
+<td>ADMIN_RECORD</td>
+<td>id / username; password_hash; role; 2FA configuration</td>
+</tr>
+<tr>
+<td>UPLOAD_FILE</td>
+<td>relative path; validated image or catalog bytes; stored outside app container</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parent</th>
+<th>Child</th>
+<th>Relationship</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CMS_DOCUMENT</td>
+<td>CONTENT_RECORD</td>
+<td>contains</td>
+</tr>
+<tr>
+<td>CMS_DOCUMENT</td>
+<td>ADMIN_RECORD</td>
+<td>contains</td>
+</tr>
+<tr>
+<td>CONTENT_RECORD</td>
+<td>UPLOAD_FILE</td>
+<td>path references</td>
+</tr>
+</tbody></table></div>
+<p><a href="diagrams/data-model.mmd">Mermaid data model source</a></p>
+<h2 id="section-10">10 UAT และ Requirement Traceability</h2>
+<p>ตารางนี้เป็น test design และ mapping กับหลักฐานที่มี การผ่าน unit/API test ไม่เท่ากับผู้ใช้ปลายทางลงนาม UAT</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Test ID</th>
+<th>Requirement</th>
+<th>ขั้นตอนหรือ input</th>
+<th>ผลคาดหวัง</th>
+<th>สถานะหลักฐาน</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Y-UAT01</td>
+<td>Y-FR02</td>
+<td>ค้น model หรือเลือก brand</td>
+<td>รายการตรงเงื่อนไข รายการว่างต้องไม่ error</td>
+<td>รอตรวจรับ</td>
+</tr>
+<tr>
+<td>Y-UAT02</td>
+<td>Y-FR04 Y-FR05</td>
+<td>Editor เปิดหน้าจัดการ admins</td>
+<td>403 และไม่แก้บัญชี</td>
+<td>รอตรวจรับ</td>
+</tr>
+<tr>
+<td>Y-UAT03</td>
+<td>Y-FR07</td>
+<td>อัปโหลดไฟล์นามสกุลภาพแต่ bytes ไม่ใช่ภาพ</td>
+<td>ปฏิเสธและไม่ทิ้งไฟล์กำพร้า</td>
+<td>รอตรวจรับ</td>
+</tr>
+<tr>
+<td>Y-UAT04</td>
+<td>Y-FR06 Y-FR08</td>
+<td>แก้สินค้า restart แล้วเปิดใหม่</td>
+<td>คงค่าที่บันทึกและรูปเปิดได้</td>
+<td>รอตรวจรับ</td>
+</tr>
+<tr>
+<td>Y-UAT05</td>
+<td>Y-FR10</td>
+<td>ทำให้ save ล้มเหลวในข้อมูลทดสอบ</td>
+<td>ค่าก่อนหน้าและรูปอ้างอิงยังอยู่</td>
+<td>รอตรวจรับ</td>
+</tr>
+<tr>
+<td>Y-UAT06</td>
+<td>Y-FR09</td>
+<td>เปิด host public / admin / host ไม่อนุญาต</td>
+<td>แยก app ถูกต้องและปฏิเสธ host อื่น</td>
+<td>รอตรวจรับ</td>
+</tr>
+</tbody></table></div>
+<p><strong>ผู้ตรวจรับ:</strong> ยังไม่กำหนด · <strong>วันที่ตรวจรับกับผู้ใช้:</strong> ยังไม่ดำเนินการในรอบเอกสารนี้ · <strong>ผลลงนาม:</strong> ยังไม่มี</p>
+<h2 id="section-11">11 ข้อจำกัดและความเสี่ยง</h2>
+<ul>
+<li>แบบจำลองข้อมูลในเอกสารนี้เป็น logical model ของ JSON ไม่ใช่ SQL ERD และไม่มี foreign key constraint</li>
+<li>browser รอบก่อนพบปัญหา CSS จาก CSP ใน HTTP dev; แก้แล้วและ header tests ผ่าน 2 กรณี แต่ยังไม่มีภาพหลังแก้ที่ตรวจรับแล้ว</li>
+<li>ยังไม่มีรูป uploads ของเครื่องใช้งานจริงใน checkout; ไม่ควรรับรองแกลเลอรีจากโค้ดเพียงอย่างเดียว</li>
+</ul>
+<h2 id="section-12">12 คำถามที่ต้องยืนยันก่อนขยายระบบ</h2>
+<ol>
+<li>ใครอนุมัติเนื้อหาและราคาแต่ละประเภทก่อนเผยแพร่</li>
+<li>ต้องมี draft และ approval workflow หรือ publish ทันทีแบบปัจจุบัน</li>
+<li>รูปสินค้าใดมีสิทธิ์เผยแพร่ และใครดูแลข้อมูลรุ่น/ราคา</li>
+<li>ต้องเก็บ audit trail ของผู้แก้ไขเนื้อหาและระยะเวลาย้อนคืนเท่าไร</li>
+<li>ต้องสำรองทุกกี่ชั่วโมง และยอมรับการสูญหายข้อมูล/เวลาหยุดระบบได้เท่าไร</li>
+</ol>
+<h2 id="section-13">13 Source Baseline และประวัติเอกสาร</h2>
+<ul>
+<li><a href="https://github.com/intasan/yuyenpensuk-website/blob/f3d52d949649cb190f92496092bc6b0dc6739541/database.js">database.js</a></li>
+<li><a href="https://github.com/intasan/yuyenpensuk-website/blob/f3d52d949649cb190f92496092bc6b0dc6739541/routes/site.js">routes/site.js</a></li>
+<li><a href="https://github.com/intasan/yuyenpensuk-website/blob/f3d52d949649cb190f92496092bc6b0dc6739541/routes/admin.js">routes/admin.js</a></li>
+<li><a href="https://github.com/intasan/yuyenpensuk-website/blob/f3d52d949649cb190f92496092bc6b0dc6739541/middleware/auth.js">middleware/auth.js</a></li>
+<li><a href="https://github.com/intasan/yuyenpensuk-website/blob/f3d52d949649cb190f92496092bc6b0dc6739541/deploy-server.js">deploy-server.js</a></li>
+<li><a href="https://github.com/intasan/yuyenpensuk-website/blob/f3d52d949649cb190f92496092bc6b0dc6739541/tests/security-headers.test.js">tests/security-headers.test.js</a></li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Version</th>
+<th>วันที่</th>
+<th>รายการเปลี่ยนแปลง</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.0</td>
+<td>30 October 2026</td>
+<td>จัดทำ requirement catalogue, data flow register, diagrams, data dictionary และ UAT traceability จาก source baseline</td>
+</tr>
+</tbody></table></div>
+<p>เอกสารวิเคราะห์และไดอะแกรมเป็น deliverable ใหม่ ไม่ใช่ภาพหน้าจอหรือหลักฐานผลการทำงานที่ยังไม่ได้ทดสอบ ไม่มีการอ่านหรือแก้ repository ที่ผู้ใช้ระบุให้ยกเว้น</p>
+</main><footer>เอกสารวิเคราะห์จาก source baseline ไม่ใช่บันทึกสัมภาษณ์หรือการรับรอง UAT ที่ยังไม่ได้ดำเนินการ</footer></body></html>

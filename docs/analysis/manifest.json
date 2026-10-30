@@ -1,0 +1,15 @@
+{
+  "title": "Yuyenpensuk Website and CMS",
+  "repo": "yuyenpensuk-website",
+  "slug": "yuyenpensuk",
+  "head": "f3d52d949649cb190f92496092bc6b0dc6739541",
+  "document_version": "1.0",
+  "date": "2026-10-30",
+  "requirements": 10,
+  "diagrams": [
+    "context",
+    "data-flow",
+    "workflow",
+    "data-model"
+  ]
+}
