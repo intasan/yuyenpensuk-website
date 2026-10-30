@@ -44,6 +44,7 @@ function load() {
       throw new Error(`Persistent database ${DB_PATH} is not a valid JSON object`);
     }
   } else {
+    if(process.env.REQUIRE_EXISTING_DATA === "1") throw new Error("Verified CMS database missing; automatic seed data disabled for evidence capture");
     db = seed();
     save();
   }

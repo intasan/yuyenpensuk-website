@@ -1,0 +1,16 @@
+/workspace/scratch/1ef458904073/repos/yuyenpensuk-website/database.js:47
+    if(process.env.REQUIRE_EXISTING_DATA === "1") throw new Error("Verified CMS database missing; automatic seed data disabled for evidence capture");
+                                                  ^
+
+Error: Verified CMS database missing; automatic seed data disabled for evidence capture
+    at Object.load (/workspace/scratch/1ef458904073/repos/yuyenpensuk-website/database.js:47:57)
+    at Object.<anonymous> (/workspace/scratch/1ef458904073/repos/yuyenpensuk-website/server.js:13:10)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.1

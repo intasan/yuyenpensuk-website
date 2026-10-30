@@ -1,0 +1,104 @@
+{
+  "repository": "intasan/yuyenpensuk-website",
+  "source_commit": "cfd0714b778a1dd8090199cd1953cdb80d6be2b3",
+  "inspected_at": "2026-10-30T17:50:44.726997+00:00",
+  "tracked_file_count": 120,
+  "checks": [
+    {
+      "file": "admin-server.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "catalog.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "database.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "deploy-server.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "middleware/auth.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "middleware/rateLimit.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "middleware/securityHeaders.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "preview.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "routes/admin.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "routes/site.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "scripts/audit.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "scripts/check-production-env.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "server.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "sessionStore.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "tests/security-headers.test.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "file": "utils/product-images.js",
+      "check": "JavaScript syntax only",
+      "ok": true,
+      "error": ""
+    }
+  ]
+}
